@@ -1,0 +1,1120 @@
+
+body {
+	background-color: #edeff3;
+	font-family: SegoeWP, sans-serif;
+}
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.network h4, .welcome h4, .album h4, .register h4, .skills h4, .seven h4, .mes-header h4, .navigation h4, .chat h4, .twelve h4, .fourteen h4, .sixteen h4, .big-cloud  h4{
+	font-weight: normal;
+	font-size: 25px;
+
+}
+
+
+header {
+	margin-top: 20px;
+}
+header img {
+	padding: 5px 0;
+}	
+
+	/*основной секшн*/
+section {
+
+}
+#errors{
+	color: red;
+	font-style: italic;
+	font-weight: 300;
+}
+#welcome{
+	color: blue;
+	font-style: italic;
+
+}
+ /* первый блок слева*/
+.wrap2colls {
+
+}
+
+div.wiev_report  {
+	/*размер удален*/
+	color: #747474;
+	font-size: 25px;
+	padding: 20px 10px;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	background-color: #fff;
+}	
+.wiev_report a {
+	text-decoration: none;
+	border: 1px solid #f7a22f;
+	background-color: #f7a22f;
+	color: #fff;
+	padding: 7px 5px;
+	display: block;
+	margin: 10px;
+}
+.wiev_report img {
+	margin: 20px auto;
+}
+	/* первый блок слева*/
+
+	
+	/* второй блок */
+div.network {
+	/*размер удален*/
+	color: #747474;
+	text-align: center;
+	padding: 20px 0;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	font-size: 25px;	
+	background-color: #fff;
+}
+.network ul {
+	list-style-type: none;
+	
+}
+.network li {
+	display: inline-block;
+	margin: 10px
+}
+
+.network img, .welcome img {
+	margin: 10px;
+}
+	/* второй блок */
+	
+	/* третий блок */
+div.welcome {
+	/*размер удален*/
+	color: #747474;
+	text-align: center;
+	padding: 10px 0;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	font-size: 25px;	
+	background-color: #fff;
+}
+.welcome ul {
+	list-style-type: none;
+	margin: auto;
+}
+ #sun{ 
+	text-align: right;
+	margin-right: 5px;
+	}
+
+.welcome form {
+	display: flex;
+	justify-content: center;
+	margin: 20px auto;
+	color: #d5d5d5; /*Не выходит сделать надпись более светлой, этот цвет применяется, когда уже пишешь в форме*/
+}
+.welcome input {
+	padding: 10px;
+	font-size: 20px;
+	width:50%;
+}
+#btn_3 {
+	background-color: #f7a22f;
+	margin-left: 5px;
+	width:55px;
+}
+
+	/* третий блок */
+	
+	/* четвертый блок (сине-белый) */
+div.album {
+	height: 200px;
+	text-align: center;
+	padding: 0; /*паддинг прилитает из общего блока*/
+	margin: 10px 0;
+	font-size: 25px;	
+	background-color: #fff;
+	position: relative;
+	z-index: -2;
+}
+div.album > img {
+	display: block;
+	position: absolute;
+	z-index: 2;
+	top: 30%;
+	left: 42%;
+	
+}
+div.profile {
+	background-color: #1fbba6;
+	color: #fff;
+	padding: 30px;
+	width: 50%;
+	height: 100%;
+}
+div.polaroid {
+	background-color: #fff;
+	color: #cac8c8;
+	padding: 40px 0 30px 0;
+	width: 50%;
+	height: 100%;
+	
+}
+	/* четвертый блок (сине-белый) */
+
+	/* пятый блок (регистрация) */
+div.register {
+	color: #747474;
+	text-align: center;
+	margin: 10px 0 ;
+	font-size: 20px;	
+	background-color: #fff;
+	padding: 40px;
+
+}
+.register input,.register select, .adminWrapper input, .adminWrapper select {
+	width: 30%;
+	margin: 10px;
+	padding: 10px;
+	color: #cecece;
+}
+#except5, #except6 {
+	width: auto;
+}
+.register a {
+	text-decoration: none;
+	color: #fff;
+	background-color: #f7a22f;
+	border: 1px solid #f7a22f;
+	padding: 7px 25px;
+	margin-top: 60px; /*не работает*/
+	display: inline-block;
+}
+	/* пятый блок (регистрация) */
+	
+	/* шестой блок (скилл) */
+div.skills {
+	background-color: #fff;
+	color: #c8c8c8;
+	font-size: 19px;
+	margin: 10px 0;
+	padding: 20px;
+}	
+.skills p {
+	
+	text-align: left;
+	margin: 10px 0;
+	
+}	
+.skills a {
+	color: #919191;
+	padding: 15px 0;
+	text-decoration: none;
+}
+	/* шестой блок (скилл) */
+	
+	/* 7 блок (friends) */
+div.seven {
+
+	background-color: #fff;
+	color: #919191;
+	font-size: 20px;
+	padding: 20px 0 0 0;
+	margin: 10px 0;
+}	
+.seven > img {
+	float: left;
+	margin: 10px 0 20px 20px;
+}
+.social-box {
+	clear: both;
+	display: flex;
+	align-items: flex-end;
+	color: #fff;
+	font-size: 16px;
+	height: 100px;
+	width: 100%;
+}
+
+.likes, .friends, .photos {
+	height:100%;
+	width:23%;
+	padding: 25px 0 10px;
+}
+
+.likes {
+	background-color: #f75556;
+}
+.friends {
+	background-color: #e69941;
+}
+.photos {
+	background-color: #1fbba6;
+}
+.settings {
+	background-color: #fff;
+	color: #b3b3b3;
+	text-align: center;
+	width: 31%;
+	height:60%;
+	padding: 25px 0 10px;
+	border-top: 1px solid #d7cfcf;
+}	
+	/* 7 блок (friends) */
+	
+	/* 8 блок (message) */
+div.eight {
+	background-color: #fff;
+	color: #b3b3b3;
+	font-size: 20px;
+	margin: 10px 0;
+	padding: 0;
+
+}	
+.mes-header > img {
+	float: left;
+	margin: 0 0 20px 20px;
+	border: 10px solid rgba(232,232,232,0.5);
+	border-radius: 100%;
+}
+
+div.mes-header  {
+	background-image: url("../img/bg-8.jpg");
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+	min-height: 180px;
+	color: #fff;
+	padding-top: 20px;
+}	
+
+.navmes  li{
+	border: 1px solid #bdbdbd;
+	border-bottom: 3px solid #bdbdbd;;
+	font-size: 16px;
+	padding: 5px 10px;
+	border-top: none;
+}
+.navmes  li:hover {
+	border-bottom: 3px solid #14b9d6;
+}
+
+div.form-mes {
+	padding: 20px 30px;
+}
+
+.form-horizontal input{ /*textarea не хочет поддаваться*/
+	margin: 20px 0;
+}
+
+.form-mes a {
+	text-decoration: none;
+	color: #fff;
+	background-color: #f7a22f;
+	border: 1px solid #f7a22f;
+	padding: 7px 25px;
+	margin: 20px;
+}
+	/* 8 блок (message) */
+	
+	/* 9 блок (map) */
+.navigation {
+	color: #b3b3b3;
+	text-align: left;
+	margin: 10px 0;
+	font-size: 20px;	
+	background-color: #fff;
+	padding: 0;
+	
+	}
+.map {
+	width: 100%;
+    height:400px;
+	position: relative;
+    margin: 0;
+	padding: 0;
+}
+.map iframe {
+    position: absolute;
+    top: 0;
+    left:0;
+	width: 100%;
+}
+.office {
+	width: 100%;
+	margin: 0 20px 20px 20px;
+}
+.navigation button {
+	width: 52px;
+	height: 52px;
+	border: 1px solid #34bca9;
+	background-color: #34bca9;
+	opacity: 0.5;
+}
+.navigation button:hover {
+	opacity: 1;
+}
+button#opacity9 {
+	font-size: 30px;
+	color: #fff;
+}
+.navigation ul {
+	list-style-type: none;
+	position: absolute;
+	top: 296px;
+	right: 20px;
+	z-index: 1;
+}
+	/* 9 блок (map) */
+	
+	/* 10 блок (соц. сети) */
+div.chat {
+	background-color: #fff;
+	color: #c8c8c8;
+	font-size: 15px;
+	margin: 10px 0;
+	padding: 20px;
+}	
+div.chat h4 > img {
+	float: right;
+}
+img.hold{
+	background-color: #cacaca;
+	border-radius: 100%;
+	padding: 10px;
+	float: left;
+	margin: 0 5px 10px 0;
+}
+img.hold:hover {
+	background-color: #37cde7;
+}
+.active ul {
+	margin: 10px 0;
+}
+.active li {
+	padding: 5px;
+	border-bottom: 1px solid #c5c5c5;
+}
+.active h5 {
+	font-size: 20px;
+	font-weight: normal;
+}
+	/* 10 блок (соц. сети) */
+	
+	/* 11 блок (соц. сети_с цифрами) */
+div.eleven {
+	background-color: #fff;
+	color: #bdbdbd;
+	margin: 10px 0;
+	padding: 0;
+}
+.eleven li{
+	height: 95px;
+	border-bottom: 1px solid #c5c5c5;
+}
+.eleven img {
+	float: left;
+	}	
+.eleven span {
+	color: #a09f9f;
+	font-size: 27px;
+	display: block;
+	padding-top: 20px;
+}
+	/* 11 блок (соц. сети_с цифрами) */
+	
+	/* 12 блок (видео с собакой и попугаем) */
+div.twelve {
+	background-color: #fff;
+	color: #bdbdbd;
+	padding: 0;
+	margin: 10px 0;
+}
+
+.vidos_sobaka video {
+	width: 100%;
+	height: auto;
+}
+ul.buttons {
+	display: inline-flex;
+	text-align: center;
+	margin: 20px;
+	justify-content: center;
+	align-items: center;
+}
+ul.songs {
+	list-style-type: circle;
+	list-style-image: url("../img/icons/list-music.png");
+	list-style-position: inside;
+	text-align: left;
+	margin: 15px 15% 25px ;
+	font-size: 23px
+}
+
+.songs li {
+	border-bottom: 1px solid #c5c5c5;
+}
+	/* 12 блок (видео с собакой и попугаем) */
+	
+	/* 13 блок (видео с крокодилом) */
+div.thirteen {
+	background-color: #fff;
+	color: #bdbdbd;
+	padding: 0;
+	margin: 10px 0;
+}
+.thirteen video {
+	width: 100%;
+	height: auto;
+}
+	/* 13 блок (видео с крокодилом) */
+	
+	/* 14 блок (Hrithik) */
+div.fourteen {
+	background-color: #fff;
+	color: #bdbdbd;
+	margin: 10px 0;
+	padding: 20px 10px;
+	font-size: 19px;
+}
+div.fourteen > img {
+	border: 10px solid #55d4eb;
+	/*border-left: none; - поискать решение без лево-верх*/
+	border-radius: 100%;
+}
+.fourteen ul {
+	text-align: left;
+}
+.fourteen li h6 img {
+	float: left;
+	margin-right: 5px;
+}
+.fourteen h6 {
+	Font-size: 19px;
+	font-weight: normal;
+	margin: 0;
+	padding: 0;
+}
+
+li#yellow span {
+	background-color: #f7a22f;
+	color: #fff;
+}
+	/* 14 блок (Hrithik) */
+	
+	/* 15 блок (Traffic) */
+div.traffic {
+	background-color: #1fbba6;
+	color: #fff;
+	padding: 20px;
+	margin: 10px 0;
+}	
+.traffic h5 {
+	font-size: 20px;
+	font-weight: normal;
+    margin-bottom: 0;
+}
+.traffic h5 img {
+	float:right;
+}
+	/* 15 блок (Traffic) */
+	
+	/* 16 блок (Diagramm) */
+div.sixteen {
+	background-color: #fff;
+	color: #bdbdbd;
+	margin: 10px 0;
+	padding: 20px 10px;
+	font-size: 19px;
+}
+.sixteen p {
+	float: right;
+    margin-right: 3%;
+}	
+.sixteen img {
+	margin-right: 10px;
+}
+.sixteen p:after{
+	clear: both;
+}	
+	/* 16 блок (Diagramm) */
+	
+	/* 17 блок (Upload file) */
+div.seventeen {
+	background-color: #fff;
+	color: #bdbdbd;
+	font-size: 21px;
+	margin: 10px 0;
+	padding: 10% 5% 1% 10%;
+}
+
+div.drag-and-drop {
+	border: 2px dashed #cccccc;
+	background-color: #f7f6f6;
+	color: #c7c7c7;
+	font-size: 19px;
+	width: 50%;
+	margin: auto;
+	padding: 20px;
+}
+.drag-and-drop span {
+	display: block;
+}	
+.seventeen button{
+	border: 1px solid #55d4eb;
+	background-color: #55d4eb;
+	color: #fff;
+	font-size: 25px;
+	width: 50%;
+	margin: 5% auto 2%;
+	padding: 2%;
+}
+.seventeen p {
+	text-align: left;
+}
+.seventeen p img {
+	margin: 0 5px;
+}
+.seventeen li {
+	margin-top: 5%;
+}
+	/* 17 блок (Upload file) */
+	
+	/* 18 блок (Weather) */	
+div.eighteen {
+	background-color: #1fbba6;
+	color: #fff;
+	margin: 10px 0;
+	padding: 0;
+}
+div.week {
+	margin: 2% 2% 2% 9%;
+	font-size: 20px;
+}	
+.week p {
+	clear: both;
+	float: right;
+}	
+.week span {
+	font-size: 6.5em;
+}
+	
+.week img {
+margin-right: 10px;
+}
+
+div.big-cloud {
+	float: left;
+	/*display: ; */
+	text-align: left;
+}
+.big-cloud img {
+	float: left;
+	margin-bottom: 5px;
+	}
+div.calendar {
+	clear: both;
+	display: flex;
+	font-size: 25px;
+	padding: 0;
+	box-sizing: border-box;
+}
+.calendar img {
+	display: block;
+	margin: 5px 0;
+	color: #c3e8e1;
+}
+.days {
+	border: 1px solid #fff;
+	padding: 2% 4%;
+	background-color: #1bc4ad;
+	width: 14.28%;
+}
+div.days:hover {
+	border: none;
+	background-color: #1fbba6;
+	color: #c3e8e1;
+}
+	/* 18 блок (Weather) */
+	
+	/* 19 блок (Basic package) */
+div.nineteen {
+	background-color: #fff;
+	font-size: 20px;
+	margin: 10px 0;
+	margin-left: 15px;
+}
+	
+div.column-19 {
+	border: 1px solid #909090;
+	padding: 0;
+	margin: 0;
+}
+
+div.head-19 {
+	background-color: #1fbba6;
+	padding: 2%;
+}
+.column-19 h5 {
+	color: #c3e8e1;
+	font-size: 22px;
+	font-weight: normal;
+}
+div.content-19 {
+	padding: 2%;
+}
+.content-19 h5 {
+	color:	#b7b7b7;
+}
+.column-19 h2 {
+	color: #fff;
+	font-size: 4em;
+	font-weight: normal;
+}
+.column-19 h3 {
+	font-size: 30px;
+	font-weight: normal;
+	color: #1fbba6;
+}
+.column-19 img {
+	margin-right: 5px;
+}
+.column-19 hr {
+	width: 30%;
+	color: #898989;
+}
+button.btn-19 {
+	border: 1px solid #55d4eb;
+	background-color: #55d4eb;
+	color: #fff;
+	font-size: 25px;
+	width: 50%;
+	margin: 5% auto;
+	padding: 2% 1%;
+}
+	/* 19 блок (Basic package) */
+	
+	/* 20 блок (A_B) */
+div.twenty {
+	height: 400px;
+	background-color: #fff;
+	color: #bdbdbd;
+	margin: 10px 0;
+}	
+.img12 {
+	float: left;
+	margin: 3% 0;
+	width: 50%;
+}
+.list-20 {
+	width: 50%;
+	height: 100%;
+	float: right;
+	padding: 2% 5%;
+	}
+.list-20 h5 {
+	color: #b7b7b7;
+	font-size: 22px;
+	font-weight: normal;
+}
+.list-20 img {
+	margin-right: 10px;
+	
+}
+.list-20 ul {
+	text-align: left;
+	margin: 15% 5%;
+}
+button.ab {
+	background-color: #1fbba6;
+	color: #fff;
+	Font-size: 18px;
+	margin: 2% 2% 2% 0;
+	padding: 1% 2%;
+	min-width: 246px;
+	border: none;
+}
+	/* 20 блок (A_B) */
+	
+	/* 21 блок (Stars) */
+div.stars {
+	background-color: #fff;
+	color: #b7b7b7 ;
+	margin: 10px 0;
+	padding: 3% 10%;
+}
+.stars li {
+	display: inline;
+	margin: 5% 1%;
+}
+.stars h5 {
+	color: #b7b7b7;
+	font-size: 22px;
+	font-weight: normal;
+	margin: 4% 0
+}
+.stars form {
+	margin: 3% 0;
+}	
+.stars input {
+	width: 70%;
+	margin: auto;
+}
+div.wrapper21 {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	margin: 4% 0;
+}
+div.round{
+	text-align: center;
+	border: 5px dashed #bebebe;
+	border-radius: 100%;
+	width: 105px; 
+	height: 105px; 
+	line-height: 105px; 
+	margin: 20px 10px; 
+	display: inline-block;
+	padding: 28px 0;
+}	
+	/* 21 блок (Stars) */
+	
+	/* 22 блок (Remind) */
+div.twenty-two {
+	background-color: #fff;
+	color: #b7b7b7;
+	margin: 10px 0;
+	padding: 0;
+	font-size: 22px;
+}
+div.header-22 {
+	text-align: left;
+	border-bottom: 1px solid #bfbfbf;
+	padding:3% 5%;
+}
+div.header-22 h5, div.header-22 form, div.header-22img {
+	display: inline;
+	margin: 3%;
+	font-size: 22px;
+	font-weight: normal;
+}
+div.header-22 select {
+	padding: 5px 10px;
+}
+div.content-22 {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 100%;
+	margin: 3% auto;
+}
+div.content-22-inner {
+	border: 1px solid #bfbfbf;
+	padding: 3%;
+}
+div.content-22-inner h2 {
+	font-size: 3em;
+}
+div.twenty-two > form {
+	float: right;
+	margin: 0 6% 3% 0;
+}
+div#task {
+	background-color: #f8aa33;
+	color: #fff;
+}
+input#button-22 {
+	background-color: #55d4eb;
+	color: #fff;
+    padding: 2px 10px;
+}
+	/* 22 блок (Remind) */
+
+    /* 23 блок (Panda) */
+div.twenty-third {
+    background-color: #1fbba6;
+    color: #fff;
+    margin: 10px 0;
+    padding: 0;
+    font-size: 22px;
+    font-weight: normal;
+}
+div.panda-movie {
+    position: relative; /* Может не совсем правильно поступил с картинкой, но лучше так, чем никак*/
+    padding: 0;
+    background-image: url("../img/panda.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    height: 377px;
+}
+div.text-over {
+    position: absolute;
+    width: 100%;
+    bottom:0;
+    text-align: left;
+    padding: 3% 5%;
+    background-color: black;
+    opacity: 0.5;
+}
+.panda-movie img {
+    width: 100%;
+}
+.under-movie {
+    position: relative;
+    padding: 2%;
+}
+.under-movie li {
+    display:inline;
+    margin: 4px;
+}
+.left-arrow{
+    float: left;
+    margin-left: 2%;
+}
+.right-arrow {
+    float: right;
+    margin-right: 2%;
+}
+    /* 23 блок (Panda) */
+
+    /* 24 блок (Big remind) */
+div.twenty-four {
+	width:100%;
+    background-color: #fff;
+	color: #b7b7b7;
+	margin: 10px 0;
+	padding: 0;
+	font-size: 22px;
+}
+.social-icons {
+	display:flex;
+	flex-wrap: wrap;
+	align-content: flex-start;
+}
+.icons123 {
+	width: 16.6%;
+	margin: 0;
+}
+div.form-24 {
+   /*Wrapper Forms*/
+}
+div.check-24wrapper {
+   
+}
+
+div.inpt {
+    float: left;
+}
+
+div.button-check24 {
+    width:53px;
+    height:28px;
+    background:#26b9a5;
+    border-radius: 100px;
+    position: relative;
+    margin: 10px;
+}
+div.check24-one {
+    width:25px;
+    height:25px;
+    background:#fff;
+    border: 1px solid #a7a4a4;
+    margin: 1px ;
+    border-radius: 100px;
+    transition-property: right;
+    transition-duration: 5s;
+    -webkit-transition-property: right; /* Safari */
+    -webkit-transition-duration: 5s; /* Safari */
+    position:absolute;
+    z-index: 1;
+}
+div.check24-one:active {
+    left:25px;
+}   
+    /* 24 блок (Big remind) - не окончен*/ 
+
+    /* 25 блок (Bus) */
+div.twenty-fifth {
+    background-color: #1fbba6;
+    color: #fff;
+    font-size: 22px;
+    margin: 10px 0;
+    padding: 5%;
+}
+div.twenty-fifth h3 {
+    font-size: 1.5em;
+    font-weight: normal;
+}
+div.twenty-fifth input {
+    display: block;
+    margin: 10px auto;
+    color: #d5d5d5;
+    padding: 10px 40px 10px 20px;
+    background-image: url("../img/icons/time.png");
+    background-repeat: no-repeat;
+    background-position: 95% center;
+}
+div.twenty-fifth button {
+    background-color: #f8aa33;
+    padding: 0 63px;
+}
+
+    /* 25 блок (Bus) */
+
+	/* 26 блок (Прямая и 3 точки) */
+.twenty-sixth{
+	background-color: #fff;
+	color: #b7b7b7;
+	margin: 10px 0;
+	min-height: 100px;
+	padding: 30px 20px;
+}
+	/* 26 блок (Прямая и 3 точки) */
+
+/* 27 блок (Подписка на рассылку) */
+.twenty-seventh{
+	background-image: url('../img/icons/strip_yell-blue.png');
+	background-repeat: repeat-x;
+	background-color: #fff;
+	color: #b7b7b7;
+	text-align: left;
+	margin: 10px 0;
+	padding: 10px 50px;
+	font-size: 22px;
+	font-weight: 100;
+}
+.twenty-seventh h2 {
+	font-size: 2em;
+	font-weight:inherit;
+	margin: 20px 0;
+}
+/* 27 блок (Подписка на рассылку) */
+
+/* 28 блок (Foto,video,articles) */
+.twenty-eight{
+	background-color: #fff;
+	color: #b7b7b7;
+	margin: 10px 0;
+	min-height: 100px;
+}
+.twenty-eight-header li{
+	display: inline;
+	float: left;
+	padding: 10px;
+}
+.twenty-eight-header li:hover{
+
+	background-color: #1fbba6;
+	color: #fff;
+}
+.twenty-eight-content li {
+	float:right;
+	margin: 10px;
+}
+.twenty-eight-top3_foto {
+	clear: both;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	margin: 10px auto;
+}
+.twenty-eight-top3_foto img {
+	width: 200px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+/* 28 блок (Foto,video,articles) */
+
+/* 29 блок (Buy patterns) */
+.twenty-nine {
+	background-color: #fff;
+	color: #b9b9b9;
+	margin: 10px 0;
+	padding: 10px 0;
+	min-height: 100px;
+	font-size: 22px;
+	font-weight: 100;
+}
+.twenty-nine h1{
+	font-size: 2em;
+	color: #b7b7b7;
+}
+.twenty-nine hr {
+	width: 80%;
+	margin: 30px auto;
+}
+.twenty-nine form {
+	margin-top: 50px;
+	font-weight: 100;
+}
+#inpt_num {
+	width: 80px;
+	padding: 10px;
+	font-size: 25px;
+	color:#d5d5d5;
+}
+input#button-29 {
+	background-color: #55d4eb;
+	color: #fff;
+	font-size: 1.5em;
+	padding: 2px 10px;
+	margin: 20px 10px 10px;
+}
+.twenty-nine form > h1 {
+	color: #ffb583;
+	font-weight: 100;
+}
+/* 29 блок (Buy patterns) */
+
+/*Footer*/
+.footer{
+	background-color: #fff;
+	color: #b9b9b9;
+	font-size: 2rem;
+	margin: 10px;
+	padding: 10px ;
+
+}
+/*Footer*/
+
+/*основной секшн*/
+
+/*Страница Admin*/
+.adminWrapper{
+	min-height: 500px;
+	width: 100%;
+	clear: both;
+}
+.dataTable{
+	width: 80%;
+	margin: 5% auto;
+	background-color: #fff;
+	font-size: 1.2em;
+	color: #1fbba6;
+}
+
+.dataTable th {
+	text-align: center;
+	font-size: 1.3em;
+	font-weight:lighter;
+	color: #898989;
+}
+
+.adminWrapper input, .adminWrapper select {
+	width: 20%;
+	margin: 10px;
+	padding: 5px;
+	color: #1fbba6;
+}
+.nav-buttons_wrapper{
+	margin-top: 20px;
+	float: right;
+}
+.Nbtn{
+margin: 0 5px;
+}
+/*Страница Admin*/
