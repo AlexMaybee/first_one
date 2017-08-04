@@ -56,7 +56,8 @@ $route['four'] = 'four_contr';
 $route['admin'] ='admin_contr/user_table';
 $route['photo'] = 'photo_contr';
 $route['search'] = 'search_contr';
-$route['search/(:any)'] = "search/index/$1";
+$route['search/(:any)'] = "search/index/$1"; //doesn't work
+//$route['my_controller'] = 'my_controller';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 

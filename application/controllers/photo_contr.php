@@ -1,5 +1,6 @@
 <?php
-class Photo_contr extends CI_Controller{
+defined('BASEPATH') OR exit('No direct script access allowed');
+class Photo_contr extends MY_Controller{ //CI_Controller{
 
     public function __construct()
     {
@@ -10,8 +11,10 @@ class Photo_contr extends CI_Controller{
 
     public function index()
     {
-        $loginUserParameter = $_SESSION['userData']['logged_In'];
-        if($loginUserParameter) {
+       /* $loginUserParameter = $_SESSION['userData']['logged_In'];
+        if($loginUserParameter) */
+       if(parent::index())
+        {
             $this->load->model(array('photos_model'));
             $this->output->enable_profiler(TRUE); //Выводит всю информацию под страницей
             if($data['count'] = $this->photos_model->countFotos())

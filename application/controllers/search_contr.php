@@ -1,5 +1,6 @@
 <?php
-class Search_contr extends CI_Controller{
+defined('BASEPATH') OR exit('No direct script access allowed');
+class Search_contr extends MY_Controller{//CI_Controller{
 
     public function __construct()
     {
@@ -10,13 +11,13 @@ class Search_contr extends CI_Controller{
 
     public function index()
     {
-        $loginUserParameter = $_SESSION['userData']['logged_In']; //Если человек не залогинен, то он не сможет попать на эту страницу.
-        if($loginUserParameter)
+       /* $loginUserParameter = $_SESSION['userData']['logged_In']; //Если человек не залогинен, то он не сможет попать на эту страницу.
+        if($loginUserParameter)*/ if(parent::index())
         {
             $this->output->enable_profiler(TRUE); //Выводит всю информацию под страницей
             $this->load->model('users');
-           //$this->form_validation->set_rules('search_str','Search string','trim|required|min_length[2]|htmlspecialchars');
-           // if($this->form_validation->run() === true) {
+          $this->form_validation->set_rules('search_str','Search string','trim|required|min_length[2]|htmlspecialchars');
+            if($this->form_validation->run() === true) {
 
                 if($data['count'] = $this->users->countMatchesOfSearch())
                 {
@@ -46,7 +47,7 @@ class Search_contr extends CI_Controller{
                     //Далее данные передаются в запрос для загрузки пагинации
                    $data['user_data'] = $this->users->globalUsers($config['per_page'],$this->uri->segment(3));
 
-                   var_dump($data['count']);
+                 //  var_dump($data['count']);
                     /*    echo '<br>';
                         //echo time();
                         echo date( 'H:i:s d n Y', time() );
@@ -64,14 +65,14 @@ class Search_contr extends CI_Controller{
                     $data['footer'] = $this->load->view('templates/footer', '', true); //Ставим перед загрузкой основной страницы, иначе не видит переменную.
                     $this->load->view('pages/search_page', $data);      //load page view
                 }
-         //   }
-        /*  else {
+            }
+          else {
               //echo "Валидация не прошла";
               $data['header'] = $this->load->view('templates/header', '', true); //load view header and send some data to header (if needed in the future)
               $data['footer'] = $this->load->view('templates/footer', '', true); //Ставим перед загрузкой основной страницы, иначе не видит переменную.
               $this->load->view('pages/search_page', $data);      //load page view
               // redirect('/search_contr','refresh');
-          }*/
+          }
         }
     }
 }

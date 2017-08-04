@@ -80,7 +80,7 @@ $autoload['libraries'] = array('');
 |
 */
 //$autoload['drivers'] = array();
-$autoload['drivers'] = array('session');
+$autoload['drivers'] = array();
 
 /*
 | -------------------------------------------------------------------

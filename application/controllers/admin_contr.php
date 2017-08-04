@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Admin_contr extends CI_Controller{
+class Admin_contr extends MY_Controller{ //CI_Controller{
 
     public function __construct()
     {
@@ -12,9 +12,11 @@ class Admin_contr extends CI_Controller{
 
     public function index()
     {
-        $loginUserParameter = $_SESSION['userData']['logged_In'];//$this->session->userData();
+       /* $loginUserParameter = $_SESSION['userData']['logged_In'];//$this->session->userData();
         //Если есть данные сессии в виде $loginUserParameter, то вытягиваем данные из таблицы и выводим КРАСИВО
-        if($loginUserParameter) {
+        if($loginUserParameter) */
+        if(parent::index()=== true)
+        {
             // var_dump($loginUserParameter);
 
             //caledar
