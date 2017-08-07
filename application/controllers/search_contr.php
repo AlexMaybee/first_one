@@ -1,19 +1,22 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Search_contr extends MY_Controller{//CI_Controller{
+class Search_contr extends CI_Controller{
 
     public function __construct()
     {
         parent::__construct();
+        $this->load->library(array('form_validation','table','session','login'));
+      //  $log= new Login(); // Инициализация не нужна, ибо он грузит саму бибилиотеку, чего достаточно.
+
         $this->load->helper(array('url','form'));
-        $this->load->library(array('form_validation','table','session'));
+
     }
 
     public function index()
     {
        /* $loginUserParameter = $_SESSION['userData']['logged_In']; //Если человек не залогинен, то он не сможет попать на эту страницу.
-        if($loginUserParameter)*/ if(parent::index())
-        {
+        if($loginUserParameter)*/ //if(parent::index())
+      //  {
             $this->output->enable_profiler(TRUE); //Выводит всю информацию под страницей
             $this->load->model('users');
           $this->form_validation->set_rules('search_str','Search string','trim|required|min_length[2]|htmlspecialchars');
@@ -41,7 +44,7 @@ class Search_contr extends MY_Controller{//CI_Controller{
                         'first_tag_close' => '</li>',
                         'last_tag_open' => '<li>',
                         'last_tag_close' => '</li>',
-   
+
                     );
                     $this->pagination->initialize($config);
                     //Далее данные передаются в запрос для загрузки пагинации
@@ -74,5 +77,5 @@ class Search_contr extends MY_Controller{//CI_Controller{
               // redirect('/search_contr','refresh');
           }
         }
-    }
+   // }
 }

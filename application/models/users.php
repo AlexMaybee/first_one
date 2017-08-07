@@ -17,7 +17,7 @@ class Users extends CI_Model{
     }*/
     public function getUsers() //Перенес сюда все возможное из контроллера main->userLogin()
     {
-        $this->form_validation->set_rules('login', 'Your login','required|valid_email|htmlspecialchars|trim');
+        $this->form_validation->set_rules('login', 'Your login','required|htmlspecialchars|trim'); //Удалил проверку е-мейла, т.к. логин теперь по фамилии и мейлу.
         $this->form_validation->set_rules('password','Your password','trim|required|htmlspecialchars|min_length[5]');
         if($this->form_validation->run() == false) {
             return false; //Если валидация не прошла, возвращаем фалс и выводим ошибку.
@@ -32,8 +32,10 @@ class Users extends CI_Model{
             $this->db->join('country','users_details.id_country=country.id','left');
             $this->db->join('towns','users_details.id_towns=towns.id','left');
             $this->db->join('streets','users_details.id_streets=streets.id','left');
-            $this->db->where('users_details.email',$login);
-            $this->db->where('users.pass',$password);
+            //last edition
+            $this->db->where("(email = '$login' OR last_name = '$login') AND pass='$password'");
+            // $this->db->where('users_details.email',$login);
+           // $this->db->where('users.pass',$password);
             $query=$this->db->get();
           //  print_r($query->result_array());
             if($query->result_array()) {
@@ -304,8 +306,6 @@ class Users extends CI_Model{
             $this->db->where('streets.street', $search);
             $this->db->order_by('streets.street', 'ASC');
         }
-        else
-        {
             $this->db->or_where('users.first_name', $search);
             $this->db->or_where('users.last_name', $search);
             $this->db->or_where('users_details.email', $search);
@@ -313,7 +313,6 @@ class Users extends CI_Model{
             $this->db->or_where('country.country_name', $search);
             $this->db->or_where('towns.name', $search);
             $this->db->or_where('streets.street', $search);
-        }
 
         //$query=$this->db->count_all_results();
         $query=$this->db->get();
@@ -386,7 +385,7 @@ class Users extends CI_Model{
             $this->db->or_where('streets.street', $search);
         }
         $this->db->limit($num,$offset);
-        $query1=$this->db->get();
-        return $query1->result_array();//получаем все данные в массив
+        $query=$this->db->get();
+        return $query->result_array();//получаем все данные в массив
     }
 }

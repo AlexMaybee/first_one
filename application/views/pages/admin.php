@@ -59,7 +59,7 @@
                     Registration date
                 </th>
                 <th>
-                    Old
+                    Your old / AVG old
                 </th>
                 <th>
                     Your salary/ av. salary
@@ -105,7 +105,7 @@
                     <?php echo  $user_data['date']; ?>
                 </td>
                 <td>
-                    <?php echo $old;  ?>
+                    <?php echo $old. ' / '.$avg_old;  ?>
                 </td>
                 <td>
                     <?php echo $user_data['salary'].' / '.round($avg_salary['salary'],0); //need av. salary ?>

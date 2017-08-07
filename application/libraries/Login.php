@@ -2,27 +2,28 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-class Login extends CI_Controller {
+class Login { //extends CI_Controller - пока в єтом смісла не вижу!
 
     private $login = false;
 
     public function __construct()
     {
-        parent::__construct();
+        //parent::__construct();
+        $CI =& get_instance(); //так нужно крузить в библиотеке методы контроллера
 
-        $this->load->library('session');
-        $this->load->helper('url');
-        $userParam = $this->session->userdata('userData');
+        $CI->load->library('session');
+        $CI->load->helper('url');
+        $userParam = $CI->session->userdata('userData');
 
         if(isset($userParam)) {
             if(!empty($userParam)) {
                 //отправлять запрос в бз
                 $this->login = true;
-                echo 'Сессия пустая';
+             // echo "ok!";
             }
         }
         if(!$this->login) {
-              redirect('/admin', 'refresh');
+              redirect('/main', 'refresh');
               //сделй отдельный УРЛ для логина
         }
 

@@ -6,7 +6,7 @@ class Photo_contr extends MY_Controller{ //CI_Controller{
     {
         parent::__construct();
         $this->load->helper(array('url','date', 'html','form','file'));
-        $this->load->library(array('form_validation','session')); //'upload' - Запускать толлько по месту, иначе перестает грузить в папку!
+        $this->load->library(array('form_validation','session','login')); //'upload' - Запускать толлько по месту, иначе перестает грузить в папку!
     }
 
     public function index()

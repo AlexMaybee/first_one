@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Main extends MY_Controller{
+class Main extends CI_Controller{
 
     public function __construct()
     {
         parent::__construct();
         $this->load->helper(array('url','form'));
-        $this->load->library(array('form_validation','session'));
+        $this->load->library(array('form_validation','session')); //библиотеку свою вставить не могу, т.к. получается бесконечный цикл.
     }
 
     public function index()

@@ -116,17 +116,44 @@ class Users_details extends CI_Model
         $userId=$_SESSION['userData']['id'];
         $time = date('Y-m-d',time());
         $this->load->database();
-        $this->db->select('birthdate');
+        $this->db->select("substr((CURRENT_DATE()-birthdate),1,2) as Old"); //last edition of query
         $this->db->from('users_details');
         $this->db->where('id_users',$userId);
         $query= $this->db->get();
-         $row=$query->row_array();
-
-        $date1 = str_replace('-','',$row['birthdate']);
+        $row=$query->row_array();
+       // print_r($row);
+        foreach ($row as $num)
+        {
+            $old= $num;
+        }
+        /*  $this->db->select('birthdate');
+          $this->db->from('users_details');
+          $this->db->where('id_users',$userId);
+          $query= $this->db->get();*/
+     //   print_r($old);
+    /*    $date1 = str_replace('-','',$row['birthdate']);
         $date2 = str_replace('-','',$time);
         $v  = abs($date1-$date2);
 
-        return substr($v,0,-4);
+        return substr($v,0,-4); */
+    return $old;
+    }
+
+    public function avgCountOld() //функция вычисления полных лет для страницы админа
+    {
+
+        $this->load->database();
+        $this->db->select(" ROUND(AVG(substr((CURRENT_DATE()-birthdate),1,2)),0) as AvgOld"); //last edition of query
+        $this->db->from('users_details');
+        $query= $this->db->get();
+        $row=$query->row_array();
+       // print_r($query);
+        foreach ($row as $num)
+        {
+            $old= $num;
+        }
+        print_r($old);
+        return $old;
     }
 
 }

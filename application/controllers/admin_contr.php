@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Admin_contr extends MY_Controller{ //CI_Controller{
+class Admin_contr extends CI_Controller{ //CI_Controller{
 
     public function __construct()
     {
         parent::__construct();
         $this->load->helper(array('form','url','date'));
-        $this->load->library(array('form_validation','session')); //upload нужно закпускать только по месту!
+        $this->load->library(array('form_validation','session','login')); //upload нужно закпускать только по месту!
     }
 
     public function index()
@@ -15,8 +15,8 @@ class Admin_contr extends MY_Controller{ //CI_Controller{
        /* $loginUserParameter = $_SESSION['userData']['logged_In'];//$this->session->userData();
         //Если есть данные сессии в виде $loginUserParameter, то вытягиваем данные из таблицы и выводим КРАСИВО
         if($loginUserParameter) */
-        if(parent::index()=== true)
-        {
+   //     if(parent::index()=== true)
+    //    {
             // var_dump($loginUserParameter);
 
             //caledar
@@ -33,6 +33,7 @@ class Admin_contr extends MY_Controller{ //CI_Controller{
             //Загружаем данные из таблицы по совпадению с ИД и передаем в переменную $data, чтобы вывести на странице админа
             $this->load->model(array('users','users_details','countries','towns','streets'));
 
+            $data['avg_old']=$this->users_details->avgCountOld();
             $data['old']= $this->users_details->countOld();
             $data['avg_salary']= $this->users_details->avarge_salary();
             $data['countries'] = $this->countries->coutriesLoad();
@@ -48,7 +49,7 @@ class Admin_contr extends MY_Controller{ //CI_Controller{
             $data['header'] = $this->load->view('templates/header', '', true); //load view header and send some data to header (if needed in the future)
             $data['footer'] = $this->load->view('templates/footer', '', true); //Ставим перед загрузкой основной страницы, иначе не видит переменную.
             $this->load->view('pages/admin', $data);      //load page view
-        }
+    //    }
 
     }
 
