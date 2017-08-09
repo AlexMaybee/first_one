@@ -324,7 +324,10 @@ class Users extends CI_Model{
             $id = $_SESSION['userData']['id'];
             $search = $this->input->post('search_str');
             $this->load->database();
-            $this->db->select('users.first_name, users.last_name, users_details.gender, users_details.email, users_details.phone_number, country.country_name, towns.name, streets.street');
+           // $this->db->select('users.first_name, users.last_name, users_details.gender, users_details.email, users_details.phone_number, country.country_name, towns.name, streets.street');
+            $this->db->select('users.first_name, users.last_name, users_details.gender, users_details.email, users_details.phone_number, country.country_name, towns.name, streets.street, users_details.salary, substr((CURRENT_DATE()- users_details.birthdate),1,2) as Old,
+                (SELECT ROUND(AVG(substr((CURRENT_DATE()-users_details.birthdate),1,2)),0) from users_details) as AvgOld,
+                (SELECT ROUND(AVG(users_details.salary),0) from users_details) as averge_salary');
             $this->db->from('users');
             //$this->db->where('users.id !=', $id); //никак не хочет работать!
             $this->db->join('users_details', 'users.id=users_details.id_users', 'left');

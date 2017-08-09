@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Photo_contr extends MY_Controller{ //CI_Controller{
+class Photo_contr extends CI_Controller{ //CI_Controller{
 
     public function __construct()
     {
@@ -13,8 +13,8 @@ class Photo_contr extends MY_Controller{ //CI_Controller{
     {
        /* $loginUserParameter = $_SESSION['userData']['logged_In'];
         if($loginUserParameter) */
-       if(parent::index())
-        {
+     //  if(parent::index())
+   //     {
             $this->load->model(array('photos_model'));
             $this->output->enable_profiler(TRUE); //Выводит всю информацию под страницей
             if($data['count'] = $this->photos_model->countFotos())
@@ -60,7 +60,7 @@ class Photo_contr extends MY_Controller{ //CI_Controller{
                 $data['footer'] = $this->load->view('templates/footer', '', true); //Ставим перед загрузкой основной страницы, иначе не видит переменную.
                 $this->load->view('pages/photos_page', $data);      //load page view
             }
-        }
+      //  }
 
     }
 

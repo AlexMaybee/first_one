@@ -96,11 +96,17 @@
                echo '<br>'.$count.' совпадений найдено!';
                 echo '<table class="dataTable table-bordered table-hover">';
                 $i = 1;
-                foreach ($user_data as $data) {
-                    echo '<tr><td>' . $i . '</td><td>' . $data['first_name'] . '</td><td>' . $data['last_name'] . '</td><td>' . $data['email'] . '</td><td>' . $data['phone_number'] . '</td><td>' . $data['country_name'] . '</td><td>' . $data['name'] . '</td><td>' . $data['street'] . '</td>';
+               foreach ($user_data as $data) {
+
+                    echo '<tr><td>' . $i . '</td><td>' . $data['first_name'] . '</td><td>' . $data['last_name'] . '</td><td>'. $data['Old'] . '</td><td>' . $data['email'] . '</td><td>' . $data['phone_number'] . '</td><td>' . $data['country_name'] . '</td><td>' . $data['name'] . '</td><td>' .
+                        $data['street'] . '</td>';
                     $i++;
                 }
                 echo '</table>';
+
+                echo '<ul id="welcome"><li>';
+                echo 'Средний возраст: '.$data['AvgOld'].'</li>';
+                echo 'Средняя зарплата: '.$data['averge_salary'].' у.е. </li></ul>';
 
            }
             ?>
