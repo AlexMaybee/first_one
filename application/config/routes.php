@@ -57,6 +57,17 @@ $route['admin'] ='admin_contr/user_table';
 $route['photo'] = 'photo_contr';
 $route['search'] = 'search_contr';
 $route['search/(:any)'] = "search/index/$1"; //doesn't work
+
+
+//API routes
+$route['users'] = 'api_controller/index';
+$route['users'] = 'api_controller/create';
+$route['user/(:num)'] = 'api_controller/update/$1';
+$route['user/(:num)'] = 'api_controller/remove/$1';
+
+
+
+
 //$route['my_controller'] = 'my_controller';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

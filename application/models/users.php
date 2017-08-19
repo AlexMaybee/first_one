@@ -89,6 +89,9 @@ class Users extends CI_Model{
             return false; //Если валидация не прошла, возвращаем фалс и выводим сообщение
         }
         else{
+            $email=$this->input->post('email');
+            $code=$this->input->post('secure_code');
+            $name=$this->input->post('fName');
             $formData = array(
                 'first_name' => $this->input->post('fName'),
                 'last_name' => $this->input->post('lName'),
@@ -115,6 +118,7 @@ class Users extends CI_Model{
             $this->load->database();
             if($query=$this->db->insert('users_details', $formData1) === true)
             {
+                $this->secCodeSend($email,$code,$name); //Отправляем сообщение на почту с кодом, НО НЕ РАБОТАЕТ!
                 return true;
             }
         }
@@ -252,10 +256,12 @@ class Users extends CI_Model{
 
     }
 
-    public function countMatchesOfSearch()
+  /*  public function countMatchesOfSearch($flag = null)
     {
         $id=$_SESSION['userData']['id'];
+
         $search = $this->input->post('search_str');
+
 
         $this->load->database();
         $this->db->select('users.first_name, users.last_name, users_details.gender, users_details.email, users_details.phone_number, country.country_name, towns.name, streets.street');
@@ -266,116 +272,61 @@ class Users extends CI_Model{
         $this->db->join('towns','users_details.id_towns=towns.id','left');
         $this->db->join('streets','users_details.id_streets=streets.id','left');
 
-        if($this->input->post('srch_name'))
-        {
-            $this->db->where('users.first_name', $search);
-            $this->db->order_by('users.first_name', 'ASC');
-        }
-        if($this->input->post('srch_sername'))
-        {
-            $this->db->where('users.last_name', $search);
-            $this->db->order_by('users.last_name', 'ASC');
-        }
-        if($this->input->post('srch_gender'))
-        {
-            $this->db->where('users_details.gender', $search);
-            $this->db->order_by('users.first_name', 'ASC');
-        }
-        if($this->input->post('srch_email'))
-        {
-            $this->db->where('users_details.email', $search);
-            $this->db->order_by('users_details.email', 'ASC');
-        }
-        if($this->input->post('srch_phone'))
-        {
-            $this->db->where('users_details.phone_number', $search);
-            $this->db->order_by('users_details.phone_number', 'ASC');
-        }
-        if($this->input->post('srch_country'))
-        {
-            $this->db->where('country.country_name', $search);
-            $this->db->order_by('users.first_name', 'ASC');
-        }
-        if($this->input->post('srch_town'))
-        {
-            $this->db->where('towns.name', $search);
-            $this->db->order_by('towns.name', 'ASC');
-        }
-        if($this->input->post('srch_street'))
-        {
-            $this->db->where('streets.street', $search);
-            $this->db->order_by('streets.street', 'ASC');
-        }
-            $this->db->or_where('users.first_name', $search);
-            $this->db->or_where('users.last_name', $search);
-            $this->db->or_where('users_details.email', $search);
-            $this->db->or_where('users_details.phone_number', $search);
-            $this->db->or_where('country.country_name', $search);
-            $this->db->or_where('towns.name', $search);
-            $this->db->or_where('streets.street', $search);
-
-        //$query=$this->db->count_all_results();
-        $query=$this->db->get();
-    return $query->num_rows(); //считаем кол-во строк
-    }
-
-    public function globalUsers($num,$offset) //пример правильного запроса с поиском по всем полям
-    {
-            $id = $_SESSION['userData']['id'];
-            $search = $this->input->post('search_str');
-            $this->load->database();
-           // $this->db->select('users.first_name, users.last_name, users_details.gender, users_details.email, users_details.phone_number, country.country_name, towns.name, streets.street');
-            $this->db->select('users.first_name, users.last_name, users_details.gender, users_details.email, users_details.phone_number, country.country_name, towns.name, streets.street, users_details.salary, substr((CURRENT_DATE()- users_details.birthdate),1,2) as Old,
-                (SELECT ROUND(AVG(substr((CURRENT_DATE()-users_details.birthdate),1,2)),0) from users_details) as AvgOld,
-                (SELECT ROUND(AVG(users_details.salary),0) from users_details) as averge_salary');
-            $this->db->from('users');
-            //$this->db->where('users.id !=', $id); //никак не хочет работать!
-            $this->db->join('users_details', 'users.id=users_details.id_users', 'left');
-            $this->db->join('country','users_details.id_country=country.id','left');
-            $this->db->join('towns','users_details.id_towns=towns.id','left');
-            $this->db->join('streets','users_details.id_streets=streets.id','left');
-
         if($this->input->post('srch_name')) // Нужно сделать так, чтобы при нажатии галочки искало только по конкретному полю
         {                                   //Having не разрешает в подсчете результатов, а при выборе 2-х полей выводит только общее, где совпало значение в 2-х полях
             $this->db->where('users.first_name', $search);
             $this->db->order_by('users.first_name', 'ASC');
-         //   $this->db->limit($num,$offset);
-           // $query1=$this->db->get();
+            $query=$this->db->get();
+            return $query->result_array();
         }
         if($this->input->post('srch_sername'))
         {
             $this->db->where('users.last_name', $search);
             $this->db->order_by('users.last_name', 'ASC');
+            $query=$this->db->get();
+            return $query->result_array();
         }
         if($this->input->post('srch_gender'))
         {
             $this->db->where('users_details.gender', $search);
             $this->db->order_by('users.first_name', 'ASC');
+            $query=$this->db->get();
+            return $query->num_rows();
         }
         if($this->input->post('srch_email'))
         {
             $this->db->where('users_details.email', $search);
             $this->db->order_by('users_details.email', 'ASC');
+            $query=$this->db->get();
+            return $query->num_rows();
         }
         if($this->input->post('srch_phone'))
         {
             $this->db->where('users_details.phone_number', $search);
             $this->db->order_by('users_details.phone_number', 'ASC');
+            $query=$this->db->get();
+            return $query->num_rows();
         }
         if($this->input->post('srch_country'))
         {
             $this->db->where('country.country_name', $search);
             $this->db->order_by('users.first_name', 'ASC');
+            $query=$this->db->get();
+            return $query->num_rows();
         }
         if($this->input->post('srch_town'))
         {
             $this->db->where('towns.name', $search);
             $this->db->order_by('users.first_name', 'ASC');
+            $query=$this->db->get();
+            return $query->num_rows();
         }
         if($this->input->post('srch_street'))
         {
             $this->db->where('streets.street', $search);
             $this->db->order_by('streets.street', 'ASC');
+            $query=$this->db->get();
+            return $query->num_rows();
         }
         else
         {
@@ -386,9 +337,264 @@ class Users extends CI_Model{
             $this->db->or_where('country.country_name', $search);
             $this->db->or_where('towns.name', $search);
             $this->db->or_where('streets.street', $search);
+            $query=$this->db->get();
+            return $query->num_rows(); //считаем кол-во строк
         }
-        $this->db->limit($num,$offset);
+        //$query=$this->db->count_all_results();
         $query=$this->db->get();
-        return $query->result_array();//получаем все данные в массив
+    return $query->num_rows(); //считаем кол-во строк
+    } */
+
+    public function globalUsers() //пример правильного запроса с поиском по всем полям
+    {
+        $this->form_validation->set_rules('search_str','Search string','trim|required|min_length[2]|htmlspecialchars');
+        if($this->form_validation->run() === true)
+        {
+            $search = $this->input->post('search_str');
+
+            /***** STR WORDS CALC ****/
+            $search_array=preg_split("/[\s,]+/",$search);
+        //    print_r($search_array);
+            $col=count($search_array);
+            echo $col.'<br>';
+            /***** STR WORDS CALC ****/
+
+            $this->load->database();
+            $this->db->select('users.first_name, users.last_name, users_details.gender, users_details.email, users_details.phone_number, country.country_name, towns.name, streets.street, users_details.salary, substr((CURRENT_DATE()- users_details.birthdate),1,2) as Old,
+                (SELECT ROUND(AVG(substr((CURRENT_DATE()-users_details.birthdate),1,2)),0) from users_details) as AvgOld,
+                (SELECT ROUND(AVG(users_details.salary),0) from users_details) as averge_salary');
+            $this->db->from('users');
+            $this->db->join('users_details', 'users.id=users_details.id_users', 'left');
+            $this->db->join('country', 'users_details.id_country=country.id', 'left');
+            $this->db->join('towns', 'users_details.id_towns=towns.id', 'left');
+            $this->db->join('streets', 'users_details.id_streets=streets.id', 'left');
+
+                if($col == 1)
+                {
+                    if ($this->input->post('srch_name')) // Нужно сделать так, чтобы при нажатии галочки искало только по конкретному полю
+                    {                                   //Having не разрешает в подсчете результатов, а при выборе 2-х полей выводит только общее, где совпало значение в 2-х полях
+                        $this->db->where('users.first_name', $search);
+                        $this->db->order_by('users.first_name', 'ASC');
+                        $query = $this->db->get();
+                        return $query->result_array();
+                    }
+                    if ($this->input->post('srch_sername')) {
+                        $this->db->where('users.last_name', $search);
+                        $this->db->order_by('users.last_name', 'ASC');
+                        $query = $this->db->get();
+                        return $query->result_array();
+                    }
+                    if ($this->input->post('srch_gender')) {
+                        $this->db->where('users_details.gender', $search);
+                        $this->db->order_by('users.first_name', 'ASC');
+                        $query = $this->db->get();
+                        return $query->result_array();
+                    }
+                    if ($this->input->post('srch_email')) {
+                        $this->db->where('users_details.email', $search);
+                        $this->db->order_by('users_details.email', 'ASC');
+                        $query = $this->db->get();
+                        return $query->result_array();
+                    }
+                    if ($this->input->post('srch_phone')) {
+                        $this->db->where('users_details.phone_number', $search);
+                        $this->db->order_by('users_details.phone_number', 'ASC');
+                        $query = $this->db->get();
+                        return $query->result_array();
+                    }
+                    if ($this->input->post('srch_country')) {
+                        $this->db->where('country.country_name', $search);
+                        $this->db->order_by('users.first_name', 'ASC');
+                        $query = $this->db->get();
+                        return $query->result_array();
+                    }
+                    if ($this->input->post('srch_town')) {
+                        $this->db->where('towns.name', $search);
+                        $this->db->order_by('users.first_name', 'ASC');
+                        $query = $this->db->get();
+                        return $query->result_array();
+                    }
+                    if ($this->input->post('srch_street')) {
+                        $this->db->where('streets.street', $search);
+                        $this->db->order_by('streets.street', 'ASC');
+                        $query = $this->db->get();
+                        return $query->result_array();
+                    } else {
+
+                        $this->db->or_where('users.first_name', $search);
+                        $this->db->or_where('users.last_name', $search);
+                        $this->db->or_where('users_details.email', $search);
+                        $this->db->or_where('users_details.phone_number', $search);
+                        $this->db->or_where('country.country_name', $search);
+                        $this->db->or_where('towns.name', $search);
+                        $this->db->or_where('streets.street', $search);
+                        $query = $this->db->get();
+                        return $query->result_array();//получаем все данные в массив
+                    }
+                }
+                if ($col > 1)
+                {
+                    print_r($search_array);
+
+
+                    if ($this->input->post('srch_name')) // Нужно сделать так, чтобы при нажатии галочки искало только по конкретному полю
+                    {                                   //Having не разрешает в подсчете результатов, а при выборе 2-х полей выводит только общее, где совпало значение в 2-х полях
+                        $this->db->where('users.first_name', $search_array[0]);
+                        for ($i = 1; $i < $col; ++$i ) {
+
+                            $this->db->group_start();
+                            $this->db->or_where('users.last_name', $search_array[$i]);
+                            $this->db->or_where('users_details.email',$search_array[$i]);
+                            $this->db->or_where('users_details.phone_number', $search_array[$i]);
+                            $this->db->or_where('country.country_name', $search_array[$i]);
+                            $this->db->or_where('towns.name', $search_array[$i]);
+                            $this->db->or_where('streets.street', $search_array[$i]);
+                            $this->db->group_end();
+                            $this->db->order_by('users.first_name', 'ASC');
+                        }
+                        $query = $this->db->get();
+                        return $query->result_array();
+                    }
+                    if ($this->input->post('srch_sername')) {
+                        $this->db->where('users.last_name', $search_array[0]);
+                        for ($i = 1; $i < $col; ++$i ) {
+                            $this->db->group_start();
+                            $this->db->or_where('users.first_name', $search_array[$i]);
+                            $this->db->or_where('users_details.email',$search_array[$i]);
+                            $this->db->or_where('users_details.phone_number', $search_array[$i]);
+                            $this->db->or_where('country.country_name', $search_array[$i]);
+                            $this->db->or_where('towns.name', $search_array[$i]);
+                            $this->db->or_where('streets.street', $search_array[$i]);
+                            $this->db->group_end();
+                            $this->db->order_by('users.last_name', 'ASC');
+                        }
+                        $this->db->order_by('users.last_name', 'ASC');
+                        $query = $this->db->get();
+                        return $query->result_array();
+                    }
+                    if ($this->input->post('srch_email')) {
+                        $this->db->where('users_details.email', $search_array[0]);
+                        for ($i = 1; $i < $col; ++$i ) {
+                            $this->db->group_start();
+                            $this->db->or_where('users.first_name', $search_array[$i]);
+                            $this->db->or_where('users.last_name', $search_array[$i]);
+                            $this->db->or_where('users_details.phone_number', $search_array[$i]);
+                            $this->db->or_where('country.country_name', $search_array[$i]);
+                            $this->db->or_where('towns.name', $search_array[$i]);
+                            $this->db->or_where('streets.street', $search_array[$i]);
+                            $this->db->group_end();
+                            $this->db->order_by('users.last_name', 'ASC');
+                        }
+                        $this->db->order_by('users_details.email', 'ASC');
+                        $query = $this->db->get();
+                        return $query->result_array();
+                    }
+                    if ($this->input->post('srch_phone')) {
+                        $this->db->where('users_details.phone_number', $search_array[0]);
+                        for ($i = 1; $i < $col; ++$i ) {
+                            $this->db->group_start();
+                            $this->db->or_where('users.first_name', $search_array[$i]);
+                            $this->db->or_where('users.last_name', $search_array[$i]);
+                            $this->db->or_where('users_details.email',$search_array[$i]);
+                            $this->db->or_where('country.country_name', $search_array[$i]);
+                            $this->db->or_where('towns.name', $search_array[$i]);
+                            $this->db->or_where('streets.street', $search_array[$i]);
+                            $this->db->group_end();
+                            $this->db->order_by('users.last_name', 'ASC');
+                        }
+                        $this->db->order_by('users_details.phone_number', 'ASC');
+                        $query = $this->db->get();
+                        return $query->result_array();
+                    }
+                    if ($this->input->post('srch_country')) {
+                        $this->db->where('country.country_name', $search_array[0]);
+                        for ($i = 1; $i < $col; ++$i ) {
+                            $this->db->group_start();
+                            $this->db->or_where('users.first_name', $search_array[$i]);
+                            $this->db->or_where('users.last_name', $search_array[$i]);
+                            $this->db->or_where('users_details.email',$search_array[$i]);
+                            $this->db->or_where('users_details.phone_number', $search_array[$i]);
+                            $this->db->or_where('towns.name', $search_array[$i]);
+                            $this->db->or_where('streets.street', $search_array[$i]);
+                            $this->db->group_end();
+                            $this->db->order_by('users.last_name', 'ASC');
+                        }
+                        $this->db->order_by('users.first_name', 'ASC');
+                        $query = $this->db->get();
+                        return $query->result_array();
+                    }
+                    if ($this->input->post('srch_town')) {
+                        $this->db->where('towns.name', $search_array[0]);
+                        for ($i = 1; $i < $col; ++$i ) {
+                            $this->db->group_start();
+                            $this->db->or_where('users.first_name', $search_array[$i]);
+                            $this->db->or_where('users.last_name', $search_array[$i]);
+                            $this->db->or_where('users_details.email',$search_array[$i]);
+                            $this->db->or_where('users_details.phone_number', $search_array[$i]);
+                            $this->db->or_where('country.country_name', $search_array[$i]);
+                            $this->db->or_where('streets.street', $search_array[$i]);
+                            $this->db->group_end();
+                            $this->db->order_by('users.last_name', 'ASC');
+                        }
+                        $this->db->order_by('users.first_name', 'ASC');
+                        $query = $this->db->get();
+                        return $query->result_array();
+                    }
+                    if ($this->input->post('srch_street')) {
+                        $this->db->like('streets.street', $search_array[0]);
+                        for ($i = 1; $i < $col; ++$i ) {
+                            $this->db->group_start();
+                            $this->db->or_where('users.first_name', $search_array[$i]);
+                            $this->db->or_where('users.last_name', $search_array[$i]);
+                            $this->db->or_where('users_details.email',$search_array[$i]);
+                            $this->db->or_where('users_details.phone_number', $search_array[$i]);
+                            $this->db->or_where('country.country_name', $search_array[$i]);
+                            $this->db->or_where('towns.name', $search_array[$i]);
+                            $this->db->group_end();
+                            $this->db->order_by('users.last_name', 'ASC');
+                        }
+                        $this->db->order_by('streets.street', 'ASC');
+                        $query = $this->db->get();
+                        return $query->result_array();
+                    }
+                    else {
+                        foreach ($search_array as $value) {
+                            $this->db->or_where('users.first_name', $value);
+                            $this->db->or_where('users.last_name', $value);
+                            $this->db->or_where('users_details.email', $value);
+                            $this->db->or_where('users_details.phone_number', $value);
+                            $this->db->or_where('country.country_name', $value);
+                            $this->db->or_where('towns.name', $value);
+                            $this->db->or_where('streets.street', $value);
+                        }
+                    }
+
+                    $query = $this->db->get();
+                    return $query->result_array();//получаем все данные в массив
+                }
+                else return false;
+
+        } else {
+            return false;
+            }
+
+
+
+
+
+    }
+
+    public function secCodeSend($email,$seccode,$name){ //Метод отправки кода на почту, пока не рабочий
+
+        $this->load->library('email');
+        $this->email->from('demage-g@mail.ru', 'Alex Ac');
+        $this->email->to($email);
+        $this->email->cc('another@another-example.com');
+        $this->email->bcc('them@their-example.com');
+
+        $this->email->subject('Your Secure Code');
+        $this->email->message('Hello, '.$name.' Your Security code is: '.$seccode.' BE cearfull, you can change it in your cabinet if it need!');
+
+        $this->email->send();
     }
 }

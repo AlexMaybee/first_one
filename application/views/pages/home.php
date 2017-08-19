@@ -483,6 +483,7 @@
 
                             <span id="errors"><?php echo form_error('street'); ?></span>
                             <?php
+
                             foreach ($streets as $street){
                                 $data_street[$street['id']]=$street['street'];
                             }

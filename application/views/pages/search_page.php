@@ -17,55 +17,19 @@
             <span id="errors"><?php echo $this->session->flashdata('error');  //Выводит ошибку, если нет совпадений в поиске ?></span>
 
             <span id="errors"><?php echo validation_errors(); //Вывод общих ошибок ?></span>
+
             <?php
-            $data_search=array(
-                'name'          => 'search_str',
-                'id'            => 'search_str',
-                'placeholder' => 'Search...',
-                'value'         =>  set_value('search_str'),
-            );
-            $data_fName=array(
-                'name' => 'srch_name',
-                'id' => 'srch_name',
-                'value' => 1
-            );
-            $data_lName=array(
-                'name' => 'srch_sername',
-                'id' => 'srch_sername',
-                'value' => 1
-            );
-            $data_gender=array(
-                'name' => 'srch_gender',
-                'id' => 'srch_gender',
-                'value' => 1
-            );
-            $data_email=array(
-                'name' => 'srch_email',
-                'id' => 'srch_email',
-                'value' => 1
-            );
-            $data_phone=array(
-                'name' => 'srch_phone',
-                'id' => 'srch_phone',
-                'value' => 'OK!'
-            );
-            $data_country=array(
-                'name' => 'srch_country',
-                'id' => 'srch_country',
-                'value' => 1
-            );
-            $data_town=array(
-                'name' => 'srch_town',
-                'id' => 'srch_town',
-                'value' => 1
-            );
-            $data_street=array(
-                'name' => 'srch_street',
-                'id' => 'srch_street',
-                'value' => 1
-            );
+            $data_search=array('name'=>'search_str', 'id' => 'search_str', 'placeholder' => 'Search...', 'value' => set_value('search_str'),);
+            $data_fName=array('name' => 'srch_name', 'id' => 'srch_name', 'value' => 1);
+            $data_lName=array('name' => 'srch_sername', 'id' => 'srch_sername', 'value' => 1);
+            $data_gender=array('name' => 'srch_gender', 'id' => 'srch_gender', 'value' => 1);
+            $data_email=array('name' => 'srch_email', 'id' => 'srch_email', 'value' => 1);
+            $data_phone=array('name' => 'srch_phone', 'id' => 'srch_phone', 'value' => 'OK!');
+            $data_country=array('name' => 'srch_country', 'id' => 'srch_country', 'value' => 1);
+            $data_town=array('name' => 'srch_town','id' => 'srch_town','value' => 1);
+            $data_street=array('name' => 'srch_street','id' => 'srch_street', 'value' => 1);
+
             echo form_open('search_contr/index');
-           // echo form_error('search_str');
             echo form_label('Введите слово для поиска','search_str');
             echo form_input($data_search);
             echo form_submit('search_submit','Search!');
@@ -86,31 +50,42 @@
            echo $this->table->generate(); //Генерация таблицы с одной строкой
 
            echo form_fieldset_close();
+           echo form_close();
+
+
         //    echo $this->input->post('search_str');
            //print_r($query);
 
             //Пришлось заменить переменную $count на строку запроса, чтобы не показывало ошибку при пустом поиске и старте страницы:
-           if($count)//$this->users->countMatchesOfSearch())//isset($_POST['search_submit']))
-           {
-                echo $this->pagination->create_links();
-               echo '<br>'.$count.' совпадений найдено!';
-                echo '<table class="dataTable table-bordered table-hover">';
-                $i = 1;
-               foreach ($user_data as $data) {
+       if(isset($_POST['search_submit']) && ($user_data))//$this->users->countMatchesOfSearch())//isset($_POST['search_submit']))
+          {
 
-                    echo '<tr><td>' . $i . '</td><td>' . $data['first_name'] . '</td><td>' . $data['last_name'] . '</td><td>'. $data['Old'] . '</td><td>' . $data['email'] . '</td><td>' . $data['phone_number'] . '</td><td>' . $data['country_name'] . '</td><td>' . $data['name'] . '</td><td>' .
-                        $data['street'] . '</td>';
+            //print_r($user_data);
+                echo '<ul id="welcome"><li>';
+                echo 'Средний возраст: '.$user_data[0]['AvgOld'].'</li>';
+                echo 'Средняя зарплата: '.$user_data[0]['averge_salary'].' у.е. </li>';
+                echo "<li>Найдено ".count($user_data).' совпадений'.'</li></ul>';
+                //Выводим результат поиска через таблицу при помощи библиотеки CI
+                $this->table->set_heading(array('№', 'Name', 'Last name', 'Years old','email','Phone number','Country','Town','Street'));
+                $template = array(
+                   'table_open' => '<table border="0" cellpadding="4" cellspacing="0" class="dataTable table-bordered table-hover">',
+                   'table_close' => '</table>'
+                     );
+                $this->table->set_template($template);
+                $i = 1;
+                foreach ($user_data as $data) {
+                    $this->table->add_row($i, $data['first_name'],$data['last_name'],$data['Old'],$data['email'],$data['phone_number'],$data['country_name'],$data['name'],$data['street']);
                     $i++;
                 }
-                echo '</table>';
+                echo $this->table->generate();
+          }
 
-                echo '<ul id="welcome"><li>';
-                echo 'Средний возраст: '.$data['AvgOld'].'</li>';
-                echo 'Средняя зарплата: '.$data['averge_salary'].' у.е. </li></ul>';
+        if((isset($_POST['search_submit']) && (!$user_data)))
+        {
+            echo '<h2 id="errors">'.'Ничего не найдено!'.'</h2>';
+        }
 
-           }
+
+
+     if($footer) echo $footer; // Пример подгрузки хедера
             ?>
-
-
-
-<?php if($footer) echo $footer; // Пример подгрузки хедера?>

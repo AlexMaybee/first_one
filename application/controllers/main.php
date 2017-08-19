@@ -12,6 +12,7 @@ class Main extends CI_Controller{
 
     public function index()
     {
+
         $this->load->model(array('countries','towns','streets'));
         $data['countries'] = $this->countries->coutriesLoad();
         $data['towns'] = $this->towns->townsLoad();
@@ -74,4 +75,5 @@ class Main extends CI_Controller{
         $this->session->sess_destroy('userData');
         redirect('/main','refresh');
     }
+
 }
